@@ -181,3 +181,15 @@ if (window.location.pathname === '/notes') {
 }
 
 getAndRenderNotes();
+
+// set a favicon for the html pages
+// <a href="https://www.flaticon.com/free-icons/pencil" title="pencil icons">Pencil icons created by DinosoftLabs - Flaticon</a>
+function setFavicon(icon){
+  let headTitle = document.querySelector('head');
+  let setFavicon = document.createElement('link');
+  setFavicon.setAttribute('rel', 'shortcut icon');
+  setFavicon.setAttribute('href', icon);
+  headTitle.appendChild(setFavicon);
+}
+
+setFavicon('./assets/images/pencil.png');
