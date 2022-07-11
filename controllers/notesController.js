@@ -15,6 +15,7 @@ const getAllNotes = (req, res) => {
 const createNote = (req, res) => {
     // Get user input from request body
     const newNote = req.body
+    // Assign note a unique uuidV4 id value
     newNote.id = uuidV4(),
     console.log(req.body.id);
     const notes = JSON.parse(fs.readFileSync(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
@@ -53,13 +54,16 @@ const deleteNote = (req, res) => {
         return data;
     }));
     // remove note by id from notes array
+    // save specific note for success log
+    let deletedNote;
     notes.forEach((note, index) => {
         if (note.id === id) {
+            deletedNote = note;
             notes.splice(index, 1);
             return
         }
     });
-    
+
     fs.writeFile(path.join(__dirname, '../db/db.json'), JSON.stringify(notes), (err) => {
         if (err) {
             return res.status(400).json({ err });
@@ -67,7 +71,7 @@ const deleteNote = (req, res) => {
         else {
             const response = {
                 status: 'success',
-                body: newNote,
+                body: deletedNote,
             };
         
             res.json(response);
