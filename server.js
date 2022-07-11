@@ -25,4 +25,9 @@ app.get(('/'), (req, res) => {
     res.sendFile(path.join(__dirname, '/public/notes.html'))
 });
 
+// GET route for wildcard
+app.get(('*'), (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/index.html'))
+});
+
 app.listen(PORT, () => console.log(`Server successfully listening for request on PORT: ${PORT}`));
