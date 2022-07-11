@@ -3,29 +3,31 @@ const path = require('path');
 const { v4: uuidV4 } = require('uuid');
 
 const getAllNotes = (req, res) => {
-    const notes = fs.readFileSync(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
         if (err) {
             return res.status(400).json({ err });
         }
-        return data;
+        res.json(JSON.parse(data));
     });
-    res.json(JSON.parse(notes));
 }
 
 const createNote = (req, res) => {
     // Get user input from request body
     const newNote = req.body
     // Assign note a unique uuidV4 id value
-    newNote.id = uuidV4(),
-    console.log(req.body.id);
+    newNote.id = uuidV4();
+
+    // Get JSON parsed array of objects from db.json
     const notes = JSON.parse(fs.readFileSync(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
         if (err) {
             return res.status(400).json({ err });
         }
         return data;
     }));
-    console.log(typeof notes);
-    notes.push(newNote);
+
+    // Add newNote object to beginning of notes array
+    notes.unshift(newNote);
+    // Update the db.json with new note array
     fs.writeFile(path.join(__dirname, '../db/db.json'), JSON.stringify(notes), (err) => {
         if (err) {
             return res.status(400).json({ err });
@@ -45,7 +47,7 @@ const createNote = (req, res) => {
 const deleteNote = (req, res) => {
     // get the note ID from req body
     const { id } = req.params;
-    console.log(id);
+
     // Read the database file and store in notes
     const notes = JSON.parse(fs.readFileSync(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
         if (err) {

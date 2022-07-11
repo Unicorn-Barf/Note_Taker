@@ -30,7 +30,7 @@ app.get(('/notes'), (req, res) => {
     res.sendFile(path.join(__dirname, '/public/notes.html'))
 });
 
-// GET route for wildcard
+// GET route for wildcard direct to homepage
 app.get(('*'), (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'))
 });
