@@ -9,7 +9,7 @@ const routes = require('./routes');
 // Use middleware for static files, and body parser
 app.use(express.static('public'));
 app.use(express.json());
-app.use(express.usrlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 // Custom middleware to log user requests
 // from Berkeley Bootcamp Express activity files
 app.use(clog);
