@@ -11,11 +11,11 @@ const getAllNotes = (req, res) => {
     res.json(JSON.parse(notes));
 }
 
-const createNote = (req, res) => {
+const createNote = async (req, res) => {
     // Get user input from request body
     const newNote = req.body
     console.log(req.body);
-    const notes = JSON.parse(fs.readFileSync(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
+    const notes = await JSON.parse(fs.readFile(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
         if (err) {
             return res.status(400).json({ err });
         }
@@ -23,7 +23,7 @@ const createNote = (req, res) => {
     }));
     console.log(typeof notes);
     notes.push(newNote);
-    fs.writeFileSync(path.join(__dirname, '../db/db.json'), JSON.stringify(notes), (err) => {
+    fs.writeFile(path.join(__dirname, '../db/db.json'), JSON.stringify(notes), (err) => {
         if (err) {
             return res.status(400).json({ err });
         }
@@ -33,9 +33,10 @@ const createNote = (req, res) => {
                 body: newNote,
             };
         
-            return res.json(response);
+            res.json(response);
         }
     });
+
 }
 
 const deleteNote = () => {
