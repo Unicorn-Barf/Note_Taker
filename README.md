@@ -21,7 +21,7 @@
 ​
 ### The challenge
 ​
-This challenged required developing a backend for an application that already has fully developed front end code.  The Note Taker application is a fullstack NodeJS application that is deployed on Heroku.  The application has a sleek UI that users can easily interact with to create, view, save, and delete notes.  The application features data persistance and will save notes added by the user to a database JSON file.  The user can also delete notes that have been saved.
+This challenge required developing a backend for an application that already has fully developed front end code.  The Note Taker application is a fullstack NodeJS application that is deployed on Heroku.  The application has a sleek UI that users can easily interact with to create, view, save, and delete notes.  The application features data persistance and will save notes added by the user to a database JSON file.  The user can also delete notes that have been saved.
 ​
 ### User Story
 ​
